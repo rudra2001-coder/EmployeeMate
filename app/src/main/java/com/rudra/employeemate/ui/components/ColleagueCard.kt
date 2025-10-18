@@ -15,6 +15,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rudra.employeemate.data.model.Colleague
@@ -38,8 +39,8 @@ fun ColleagueCard(colleague: Colleague) {
             ) {}
             Spacer(modifier = Modifier.width(16.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text("Rudra", style = MaterialTheme.typography.titleMedium)
-                Text("Android Developer", style = MaterialTheme.typography.bodyMedium)
+                Text(colleague.name, style = MaterialTheme.typography.titleMedium)
+                Text(colleague.role, style = MaterialTheme.typography.bodyMedium)
             }
             IconButton(onClick = { /* TODO */ }) {
                 Icon(Icons.Rounded.Call, contentDescription = "Call")
