@@ -1,6 +1,8 @@
 package com.rudra.employeemate.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -14,28 +16,34 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rudra.employeemate.data.model.Schedule
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ScheduleCard(
-    schedule: Schedule? = null // Optional parameter
+    schedule: Schedule, // Non-optional parameter
+    onLongClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .combinedClickable(
+                onClick = {},
+                onLongClick = onLongClick
+            ),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = schedule?.employeeName ?: "Employee Name",
+                text = schedule.employeeName,
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
             )
             Text(
-                text = "Shift: ${schedule?.shift ?: "Morning"}",
+                text = "Shift: ${schedule.shift}",
                 style = MaterialTheme.typography.bodyMedium
             )
             Text(
-                text = "Date: ${schedule?.date ?: "2025-10-18"}",
+                text = "Date: ${schedule.date}",
                 style = MaterialTheme.typography.bodySmall,
                 color = Color.Gray
             )

@@ -6,6 +6,7 @@ import androidx.compose.material.icons.rounded.Dashboard
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material.icons.rounded.Fastfood
 import androidx.compose.material.icons.rounded.People
+import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -24,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rudra.employeemate.ui.screens.ColleaguesScreen
 import com.rudra.employeemate.ui.screens.DashboardScreen
 import com.rudra.employeemate.ui.screens.MealsScreen
+import com.rudra.employeemate.ui.screens.ProfileScreen
 import com.rudra.employeemate.ui.screens.ScheduleScreen
 
 sealed class Screen(val route: String, val label: String, val icon: ImageVector) {
@@ -31,6 +33,7 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     object Schedule : Screen("schedule", "Schedule", Icons.Rounded.DateRange)
     object Meals : Screen("meals", "Meals", Icons.Rounded.Fastfood)
     object Colleagues : Screen("colleagues", "Colleagues", Icons.Rounded.People)
+    object Profile : Screen("profile", "Profile", Icons.Rounded.Person)
 }
 
 val items = listOf(
@@ -38,6 +41,7 @@ val items = listOf(
     Screen.Schedule,
     Screen.Meals,
     Screen.Colleagues,
+    Screen.Profile
 )
 
 @Composable
@@ -69,10 +73,11 @@ fun AppNavigation() {
         }
     ) { innerPadding ->
         NavHost(navController, startDestination = Screen.Dashboard.route, Modifier.padding(innerPadding)) {
-            composable(Screen.Dashboard.route) { DashboardScreen() }
+            composable(Screen.Dashboard.route) { DashboardScreen(navController) }
             composable(Screen.Schedule.route) { ScheduleScreen() }
             composable(Screen.Meals.route) { MealsScreen() }
             composable(Screen.Colleagues.route) { ColleaguesScreen() }
+            composable(Screen.Profile.route) { ProfileScreen(navController) }
         }
     }
 }

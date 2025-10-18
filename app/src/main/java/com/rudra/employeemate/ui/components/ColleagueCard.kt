@@ -1,5 +1,6 @@
 package com.rudra.employeemate.ui.components
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,11 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.rudra.employeemate.data.model.Colleague
 
 @Composable
 fun ColleagueCard(colleague: Colleague) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -42,10 +45,10 @@ fun ColleagueCard(colleague: Colleague) {
                 Text(colleague.name, style = MaterialTheme.typography.titleMedium)
                 Text(colleague.role, style = MaterialTheme.typography.bodyMedium)
             }
-            IconButton(onClick = { /* TODO */ }) {
+            IconButton(onClick = { Toast.makeText(context, "Calling ${colleague.name}", Toast.LENGTH_SHORT).show() }) {
                 Icon(Icons.Rounded.Call, contentDescription = "Call")
             }
-            IconButton(onClick = { /* TODO */ }) {
+            IconButton(onClick = { Toast.makeText(context, "Messaging ${colleague.name}", Toast.LENGTH_SHORT).show() }) {
                 Icon(Icons.Rounded.Email, contentDescription = "Message")
             }
         }
